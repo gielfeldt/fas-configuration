@@ -95,8 +95,7 @@ class DotNotation implements ConfigurationInterface
         if (!is_array($value)) {
             return $expanded;
         }
-        foreach (array_keys($value) as $subKey)
-        {
+        foreach (array_keys($value) as $subKey) {
             $expanded += $this->expand("$key.$subKey");
         }
         return $expanded;
