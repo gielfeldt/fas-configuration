@@ -1,4 +1,4 @@
-![Build Status](https://github.com/gielfeldt/fas-configuration/actions/workflows/php.yml/badge.svg)
+![Build Status](https://github.com/gielfeldt/fas-configuration/actions/workflows/test.yml/badge.svg)
 ![Test Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/gielfeldt/ac056829ce43de32d37257c91a7635e5/raw/fas-configuration__main.json)
 
 ![Latest Stable Version](https://poser.pugx.org/fas/configuration/v/stable.svg)
