@@ -42,7 +42,7 @@ Output:
 string(8) "mydbhost"
 ```
 
-[1]:  https://packagist.org/packages/gielfeldt/fas-configuration
-[2]:  https://packagist.org/packages/gielfeldt/fas-configuration#dev-main
+[1]:  https://packagist.org/packages/fas/configuration
+[2]:  https://packagist.org/packages/fas/configuration#dev-main
 [3]:  https://github.com/gielfeldt/fas-configuration/blob/main/LICENSE.md
 [4]:  https://github.com/gielfeldt/fas-configuration/actions/workflows/test.yml
