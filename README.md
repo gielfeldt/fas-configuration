@@ -1,3 +1,16 @@
+![Build Status](https://github.com/gielfeldt/fas-configuration/actions/workflows/php.yml/badge.svg)
+![Test Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/gielfeldt/ac056829ce43de32d37257c91a7635e5/raw/fas-configuration__main.json)
+
+![Latest Stable Version](https://poser.pugx.org/fas/configuration/v/stable.svg)
+![Latest Unstable Version](https://poser.pugx.org/fas/configuration/v/unstable.svg)
+![License](https://poser.pugx.org/fas/configuration/license.svg)
+![Total Downloads](https://poser.pugx.org/fas/configuration/downloads.svg)
+
+# Installation
+
+```bash
+composer require fas/configuration
+```
 
 
 # Usage
