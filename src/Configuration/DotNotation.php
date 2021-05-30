@@ -43,6 +43,7 @@ class DotNotation implements ConfigurationInterface
         }
 
         $value = $this->configuration->require($key);
+        $found = false;
         $this->traverse($value, $parts, $found);
         return $found;
     }
@@ -58,7 +59,7 @@ class DotNotation implements ConfigurationInterface
         if (!$parts) {
             return $value;
         }
-
+        $found = false;
         $value = $this->traverse($value, $parts, $found);
         return $found ? $value : $default;
     }
@@ -71,7 +72,7 @@ class DotNotation implements ConfigurationInterface
         if (!$parts) {
             return $value;
         }
-
+        $found = false;
         $value = $this->traverse($value, $parts, $found);
         if (!$found) {
             throw new NotFoundException($key);

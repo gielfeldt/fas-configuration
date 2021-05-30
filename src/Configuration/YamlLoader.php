@@ -2,6 +2,7 @@
 
 namespace Fas\Configuration;
 
+use InvalidArgumentException;
 use Symfony\Component\Yaml\Yaml;
 
 class YamlLoader extends ArrayConfiguration
@@ -11,7 +12,7 @@ class YamlLoader extends ArrayConfiguration
         $data = [];
         foreach ($filenames as $filename) {
             if (!file_exists($filename)) {
-                throw new \InvalidArgumentException("File '$filename' not found");
+                throw new InvalidArgumentException("File '$filename' not found");
             }
             $data[] = Yaml::parseFile($filename);
         }
