@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Fas\\Configuration\\": "src/Configuration/"
+            "Fas\\Configuration\\": "src/"
         }
     },
     "require-dev": {
