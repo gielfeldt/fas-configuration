@@ -9,15 +9,19 @@ class YamlLoader extends ArrayConfiguration
 {
     public function __construct(string ...$filenames)
     {
-        $data = [];
+        $allData = [];
         foreach ($filenames as $filename) {
             if (!file_exists($filename)) {
                 throw new InvalidArgumentException("File '$filename' not found");
             }
-            $data[] = Yaml::parseFile($filename);
+            $data = Yaml::parseFile($filename) ?? [];
+            if (!is_array($data)) {
+                throw new InvalidArgumentException("$filename cannot only contain a scalar value");
+            }
+            $allData[] = $data;
         }
-        $first = array_shift($data);
-        $merged = array_replace_recursive($first, ...$data);
+        $first = array_shift($allData);
+        $merged = array_replace_recursive($first, ...$allData);
         parent::__construct($merged);
     }
 

@@ -35,4 +35,25 @@ class YamlLoaderTest extends GenericConfigurationTestBase
         $this->expectException(InvalidArgumentException::class);
         $config = new YamlLoader($filename1, $filename2);
     }
+
+    public function allowFirstEmptyYamlFile()
+    {
+        $filename1 = __DIR__ . '/fixture.empty.yaml';
+        $filename2 = __DIR__ . '/fixture1.yaml';
+        $filename3 = __DIR__ . '/fixture.empty.yaml';
+        $filename4 = __DIR__ . '/fixture2.yaml';
+        $filename5 = __DIR__ . '/fixture3.yaml';
+        $config = new YamlLoader($filename1, $filename2, $filename3, $filename4, $filename5);
+
+        $this->assertEquals('test', $config->require('notempty4'));
+    }
+
+    public function testWillThrowExceptionOnScalarYaml()
+    {
+        $filename1 = __DIR__ . '/fixture.scalar.yaml';
+
+        $this->expectException(InvalidArgumentException::class);
+        $config = new YamlLoader($filename1);
+    }
+
 }
