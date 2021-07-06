@@ -55,5 +55,4 @@ class YamlLoaderTest extends GenericConfigurationTestBase
         $this->expectException(InvalidArgumentException::class);
         $config = new YamlLoader($filename1);
     }
-
 }
