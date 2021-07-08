@@ -2,6 +2,8 @@
 
 namespace Fas\Configuration;
 
+use Exception;
+
 class FileCache
 {
     public static function load(string $filename): ?ConfigurationInterface
@@ -17,7 +19,7 @@ class FileCache
         return new $class();
     }
 
-    public static function save(string $filename, ConfigurationInterface $configuration)
+    public static function save(string $filename, ConfigurationInterface $configuration, $preload = null)
     {
         $exportedSettings = var_export($configuration->all(), true);
         $id = hash('sha256', $exportedSettings);
@@ -45,5 +47,40 @@ class FileCache
         @chmod($tempFilename, 0666);
         rename($tempFilename, $includerFilename);
         @chmod($includerFilename, 0666);
+
+        if ($preload) {
+            self::savePreload($preload, $classFilename);
+        }
+    }
+
+    private static function savePreload(string $filename, string $classFilename)
+    {
+        foreach (get_declared_classes() as $className) {
+            if (strpos($className, 'ComposerAutoloader') === 0) {
+                $classLoader = $className::getLoader();
+                break;
+            }
+        }
+        if (empty($classLoader)) {
+            throw new Exception("Cannot locate class loader");
+        }
+
+        $files = [];
+        $files[] = $classLoader->findFile(ConfigurationInterface::class);
+        $files[] = $classLoader->findFile(GlobalConfiguration::class);
+        $files[] = $classLoader->findFile(FileCache::class);
+        $files[] = $classFilename;
+
+        $code = "<?php\n";
+        foreach ($files as $file) {
+            $code .= 'opcache_compile_file(' . var_export(realpath($file), true) . ");\n";
+        }
+
+        $tempFilename = tempnam(dirname($filename), 'fas-configuration');
+        @chmod($tempFilename, 0666);
+        file_put_contents($tempFilename, $code);
+        @chmod($tempFilename, 0666);
+        rename($tempFilename, $filename);
+        @chmod($classFilename, 0666);
     }
 }
