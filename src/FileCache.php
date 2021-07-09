@@ -73,7 +73,7 @@ class FileCache
 
         $code = "<?php\n";
         foreach ($files as $file) {
-            $code .= 'opcache_compile_file(' . var_export(realpath($file), true) . ");\n";
+            $code .= 'require_once(' . var_export(realpath($file), true) . ");\n";
         }
 
         $tempFilename = tempnam(dirname($filename), 'fas-configuration');
